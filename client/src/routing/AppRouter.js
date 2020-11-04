@@ -7,9 +7,7 @@ const AppRouter=()=> {
             <Switch>
                 {
                     routeList.map(route=>(
-                        <Route exact={route.exact} path={route.path}>
-                            <route.component/>
-                        </Route>
+                        <Route key={route.path} exact={route.exact} path={route.path} component={route.component}/>
                     ))
                 }
             </Switch>
