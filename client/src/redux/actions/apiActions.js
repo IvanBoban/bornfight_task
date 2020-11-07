@@ -1,19 +1,20 @@
 import{
-    FETCH_SINGLE_ALBUM,
-    FETCH_ALL_ALBUMS,
+    FETCH_ARTISTS,
+    FETCH_ALBUMS,
     CLEAR_SINGLE_ALBUM,
-    FAVOURITE_ALBUM,
-    UNFAVOURITE_ALBUM
+    FAVORITE_ALBUM,
+    UNFAVORITE_ALBUM
 } from './actionTypes'
 
-export const fetchAllAlbums=()=>{
+export const fetchAllAlbums=(data)=>{
     return{
-        type: FETCH_ALL_ALBUMS,
-    }
+        type: FETCH_ALBUMS,
+        payload:data
+    }   
 }
-export const fetchSingleAlbum = (data)=>{
+export const fetchArtists = (data)=>{
     return{
-        type: FETCH_SINGLE_ALBUM,
+        type: FETCH_ARTISTS,
         payload:data
     }
 }
@@ -22,15 +23,15 @@ export const clearSingleAlbum = ()=>{
         type: CLEAR_SINGLE_ALBUM
     }
 }
-export const favouriteAlbum = (data)=>{
+export const favoriteAlbum = (data)=>{
     return{
-        type: FAVOURITE_ALBUM,
-        paylaod: data
+        type: FAVORITE_ALBUM,
+        payload: data
     }
 }
-export const unfavouriteAlbum= (data)=>{
+export const unfavoriteAlbum= (data)=>{
     return{
-        type:UNFAVOURITE_ALBUM,
+        type:UNFAVORITE_ALBUM,
         payload:data
     }
 }

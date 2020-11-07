@@ -1,30 +1,27 @@
 import{
-    FETCH_ALL_ALBUMS, FETCH_SINGLE_ALBUM,
-    FAVOURITE_ALBUM, UNFAVOURITE_ALBUM,
+    FETCH_ALBUMS, 
+    FAVORITE_ALBUM, UNFAVORITE_ALBUM,
 } from '../actions/actionTypes';
 const initialState ={
     albums: null,
-    singleAlbum:null
+    artists:null
 }
 const apiReducer = (state=initialState, action)=>{
     switch(action.type){
-        case FETCH_ALL_ALBUMS:
+        case FETCH_ALBUMS:
             return{
                 ...state,
-                albums: action.payload.data
+                albums: action.payload
             }
-        case FETCH_SINGLE_ALBUM:
+        case FAVORITE_ALBUM:
             return{
                 ...state,
-                singleAlbum:action.payload.data
+                albums: state.albums.map(album=>album.id===action.payload?{...album, favorite:true}:{...album})
             }
-        case FAVOURITE_ALBUM:
+        case UNFAVORITE_ALBUM:
             return{
                 ...state,
-            }
-        case UNFAVOURITE_ALBUM:
-            return{
-                ...state
+                albums: state.albums.map(album=>album.id===action.payload?{...album, favorite:false}:{...album})
             }
         default:
             return{

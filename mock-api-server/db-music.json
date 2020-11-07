@@ -77,7 +77,7 @@
       "imageUrl": "https://is2-ssl.mzstatic.com/image/thumb/Music123/v4/ce/e8/eb/cee8eb1d-5359-033f-a095-85301ab8ef8b/886447949191.jpg/170x170bb.png",
       "releaseDate": "2019-11-08T00:00:00-07:00",
       "artistId": 4,
-      "favorite": false
+      "favorite": true
     },
     {
       "id": 5,

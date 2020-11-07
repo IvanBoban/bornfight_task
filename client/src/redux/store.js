@@ -7,7 +7,8 @@ import storage from 'redux-persist/lib/storage';
 //config for persisted store (store whipes itself after page refresh, this stores it in the localStorage so the app doesn't refresh on page refresh)
 const persistConfig={
     key: 'root',
-    storage
+    storage,
+    blacklist:['apiReducer']
 }
 //other part of the store persisting setup
 const persistedReducer = persistReducer(persistConfig, rootReducer);
