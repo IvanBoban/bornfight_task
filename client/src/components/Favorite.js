@@ -40,8 +40,8 @@ export default function Favorite(props) {
     return (
         <>
         {
-            albumData.favorite ? (<button type={"button"} onClick={onClickUnfavorite}>Remove favorite</button>):
-                        (<button type={"button"} onClick={onClickFavorite}>Mark as favorite</button>)
+            albumData.favorite ? (<button type={"button"} className={" btn unfavorite-btn"} onClick={onClickUnfavorite}>Remove favorite</button>):
+                        (<button type={"button"} className={" btn favorite-btn "} onClick={onClickFavorite}>Mark as favorite</button>)
         }
         </>
     )

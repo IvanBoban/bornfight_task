@@ -77,6 +77,41 @@ body {
   display: grid;
   place-items: center;
 }
+
+.btn{
+  padding: 0.5rem;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+.btn:hover{
+  cursor: pointer;
+}
+.favorite-btn{
+  background-color: var(--turquoise-blue);
+}
+.unfavorite-btn{
+  background-color: #b00;
+}
+.artist-heading{
+  margin-left: 2rem;
+}
+@media only screen 
+and (min-device-width : 768px)   {
+  .album-article{
+    display: grid;
+    grid-template-columns: 20% 80%;
+  }
+  .info-action-div{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 15px;
+  }
+}
+@media screen 
+  and (min-device-width: 1200px)  { 
+    .album-article{
+      margin: 5rem 10rem;
+    }
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -7,11 +7,13 @@ import AlbumItem from './AlbumItem'
 import useLoading from '../hooks/useLoading';
 import { useDispatch, useSelector } from 'react-redux';
 import {FETCH_ALBUMS} from '../redux/actions/actionTypes';
+import useError from '../hooks/useError'
 export default function AlbumFeed() {
         const dispatchRedux = useDispatch()
         const {search}=useLocation();
         const values = queryString.parse(search);
         const{isLoading,setIsLoading, LoadingIndicator}= useLoading(true);
+        const {isError, setIsError, ErrorIndicator}= useError(false)
         const albums= useSelector(state=>state.apiReducer.albums)
         const fetchAlbums = (filter)=>{
             return dispatch=>{
@@ -33,11 +35,13 @@ export default function AlbumFeed() {
                         })
                         setIsLoading(false)
                     }).catch(err=>{
-                        console.log(err)
+                        setIsError(true)
+                        setIsLoading(false)
                     })
                     
                 }).catch(err=>{
-                    console.log(err)
+                    setIsError(true)
+                    setIsLoading(false)
                 })
             }
         }        
@@ -53,13 +57,14 @@ export default function AlbumFeed() {
                 {
                     isLoading ?
                     LoadingIndicator:
-                    (<section className={"albums-section"}>
-                        {
-                            albums.map(album=>(
-                                <AlbumItem key={album.id} albumData={album} />
-                            ))
-                        }
-                    </section>)
+                      isError? (ErrorIndicator):(
+                          <section className={"albums-section"}>
+                      {
+                          albums.map(album=>(
+                              <AlbumItem key={album.id} albumData={album} />
+                          ))
+                      }
+                  </section>)  
                 }
                 
             </main>

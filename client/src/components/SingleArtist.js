@@ -1,6 +1,4 @@
 import React, {useEffect,useState} from 'react';
-import queryString from 'query-string';
-import {useLocation} from 'react-router-dom';
 import  {caller}  from "../fetching/calls";
 import ArtistHeader from './Headers/ArtistHeader'
 import AlbumItem from './AlbumItem'
@@ -8,13 +6,15 @@ import useLoading from '../hooks/useLoading';
 import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {FETCH_ALBUMS} from '../redux/actions/actionTypes';
+import useError from '../hooks/useError'
 export default function SingleArtist() {
         const {artistId}=useParams()
         const dispatchRedux = useDispatch()
         const [artistName,setArtistName]= useState('')
         const{isLoading,setIsLoading, LoadingIndicator}= useLoading(true);
+        const {isError, setIsError, ErrorIndicator}= useError(false)
         const albums= useSelector(state=>state.apiReducer.albums)
-        const fetchAlbums = (filter)=>{
+        const fetchAlbums = (r)=>{
             return dispatch=>{
                 caller.fetchAlbums(null,null,artistId).then(albumsResponse=>{
                     caller.fetchArtist(artistId).then(artistsResponse=>{
@@ -35,11 +35,13 @@ export default function SingleArtist() {
                         })
                         setIsLoading(false)
                     }).catch(err=>{
-                        console.log(err)
+                        setIsError(true)
+                        setIsLoading(false)
                     })
                     
                 }).catch(err=>{
-                    console.log(err)
+                    setIsError(true)
+                    setIsLoading(false)
                 })
             }
         }        
@@ -55,13 +57,14 @@ export default function SingleArtist() {
                 {
                     isLoading ?
                     LoadingIndicator:
-                    (<section className={"albums-section"}>
-                        {
-                            albums.map(album=>(
-                                <AlbumItem key={album.id} albumData={album} />
-                            ))
-                        }
-                    </section>)
+                      isError? (ErrorIndicator):(
+                          <section className={"albums-section"}>
+                      {
+                          albums.map(album=>(
+                              <AlbumItem key={album.id} albumData={album} />
+                          ))
+                      }
+                  </section>)  
                 }
                 
             </main>
